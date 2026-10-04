@@ -1,12 +1,16 @@
 import csv
 import os
+import sys
 from pathlib import Path
 from datetime import datetime
 
 import streamlit as st
 from dotenv import load_dotenv
-from src.classifier import classify_email
 
+ROOT_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT_DIR))
+
+from src.classifier import classify_email
 load_dotenv()
 
 DATA_FILE = Path("data/processed/email_history.csv")
