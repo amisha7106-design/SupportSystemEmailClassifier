@@ -1,0 +1,7 @@
+email,severity
+"My system is down",CRITICAL
+"Payment failed urgently",HIGH
+"I have a problem with my account",MEDIUM
+"How do I update my profile",LOW
+"Critical data loss issue",CRITICAL
+"Please help me with a refund",MEDIUM

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support Email Classifier</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7ff, #edf2ff);
+    color: #1e2a5a;
+}
+
+header {
+    background: linear-gradient(110deg, #172348, #304c91);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    font-size: clamp(28px, 4vw, 46px);
+    margin: 0 0 12px;
+}
+
+header p {
+    color: #dbe5ff;
+    font-size: 17px;
+    margin: 8px 0;
+}
+
+main {
+    max-width: 1160px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px #243b7315;
+    border: 1px solid #e2e8f7;
+}
+
+label {
+    display: block;
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 145px;
+    resize: vertical;
+    padding: 17px;
+    border: 1px solid #d5deef;
+    border-radius: 13px;
+    font: inherit;
+    font-size: 16px;
+    background: #fbfcff;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #6178ee;
+    box-shadow: 0 0 0 3px #6178ee20;
+}
+
+button {
+    margin-top: 20px;
+    padding: 16px 28px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: linear-gradient(110deg, #7229ce, #4389f5);
+    box-shadow: 0 6px 15px #6239cf30;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.result {
+    margin-top: 30px;
+    padding: 24px;
+    border-radius: 16px;
+    background: #f5f7ff;
+    border: 1px solid #e0e7fa;
+}
+
+.result h2 {
+    font-size: 21px;
+    margin: 0 0 20px;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.result-item {
+    padding: 16px;
+    border-radius: 13px;
+    overflow-wrap: anywhere;
+}
+
+.result-item strong {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.result-item p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.severity {
+    background: #e5efff;
+    color: #2856b5;
+}
+
+.category {
+    background: #f1eaff;
+    color: #713bb2;
+}
+
+.reason {
+    background: #e1f7f1;
+    color: #16836c;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin: 32px 0;
+}
+
+.feature {
+    padding: 18px;
+}
+
+.feature h3 {
+    margin: 0 0 8px;
+}
+
+.feature p {
+    color: #66738f;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 700px) {
+    .results-grid,
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📩 Support Email Classifier</h1>
+    <p>Classify your support emails by severity (Low, Medium, High)</p>
+    <p>Quick &nbsp; • &nbsp; Accurate &nbsp; • &nbsp; Smart</p>
+</header>
+
+<main>
+    <section class="card">
+        <label for="email">✉️ Enter your support email</label>
+
+        <textarea id="email" maxlength="2000"
+            placeholder="Type or paste your support email here..."></textarea>
+
+        <button id="classifyButton" onclick="classifyEmail()">
+            ✨ Classify Email
+        </button>
+
+        <section class="result">
+            <h2>📊 Classification Result</h2>
+
+            <div class="results-grid">
+                <div class="result-item severity">
+                    <strong>🛡 Severity</strong>
+                    <p id="severity">--</p>
+                </div>
+
+                <div class="result-item category">
+                    <strong>◇ Category</strong>
+                    <p id="category">--</p>
+                </div>
+
+                <div class="result-item reason">
+                    <strong>▤ Reason</strong>
+                    <p id="reason">--</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <h3>⚡ Fast & Simple</h3>
+            <p>Get instant classification with just one click.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🧠 Smart Classification</h3>
+            <p>Powered by machine learning to understand your emails.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🛡 Better Support</h3>
+            <p>Prioritize what matters most.</p>
+        </div>
+    </section>
+</main>
+
+<script>
+async function classifyEmail() {
+    const email = document.getElementById("email").value.trim();
+    const button = document.getElementById("classifyButton");
+
+    if (!email) {
+        alert("Please enter a support email first.");
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Classifying...";
+
+    try {
+        const response = await fetch("/classify", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: email })
+        });
+
+        if (!response.ok) {
+            throw new Error("API endpoint not available");
+        }
+
+        const data = await response.json();
+
+        document.getElementById("severity").textContent =
+            data.severity ?? data.prediction ?? data.label ?? "--";
+
+        document.getElementById("category").textContent =
+            data.category ?? data.email_category ?? "--";
+
+        document.getElementById("reason").textContent =
+            data.reason ?? data.explanation ?? "--";
+
+    } catch (error) {
+        alert("Classification API connect nahi ho pa rahi. app.py ka endpoint check karein.");
+        console.error(error);
+    } finally {
+        button.disabled = false;
+        button.textContent = "✨ Classify Email";
+    }
+}
+</script>
+
+</body>
+</html>
