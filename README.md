@@ -1,16 +1,35 @@
-Support Email Classifier
 
-A project to classify support emails by category and severity.
+📩 Support Email Classifier
 
-Features
+A Python-based application that classifies customer support emails by category and severity level to help prioritize customer issues efficiently.
 
-- Email preprocessing
-- Email classification
-- Streamlit interface
+✨ Features
 
-Technologies
+- Email text preprocessing
+- Automatic email classification
+- Severity detection: Low, Medium, High, and Critical
+- Interactive Streamlit web interface
+
+🛠️ Technologies Used
 
 - Python
 - Streamlit
 - Pytest
-https://support-email-classifier-amishakeshri.streamlit.app/
+
+🚀 Live Demo
+
+"Click here to try the application" (https://support-email-classifier-amishakeshri.streamlit.app/)
+
+🎯 Objective
+
+To simplify customer support management by identifying email categories and prioritizing urgent issues.
+
+👩‍💻 Author
+
+Amisha Keshri
+
+📌 Project Status
+
+Completed and deployed.
+
+
