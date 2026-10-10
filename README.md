@@ -15,6 +15,23 @@ A Python-based application that classifies customer support emails by category a
 - Python
 - Streamlit
 - Pytest
+duplicate-customer-record-finder/
+│
+├── data/
+│   ├── input/
+│   │   └── customers.csv
+│   └── output/
+│       ├── cleaned_customers.csv
+│       └── duplicate_report.csv
+│
+├── src/
+│   ├── main.py
+│   ├── preprocess.py
+│   ├── matcher.py
+│   └── duplicate_handler.py
+│
+├── requirements.txt
+└── README.md
 
 🚀 Live Demo
 
